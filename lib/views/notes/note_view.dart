@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtool show log;
-
 import 'package:mynotes/constants/routes.dart';
 import 'package:mynotes/services/auth/auth_service.dart';
 import 'package:mynotes/services/crud/notes_service.dart';
 import 'package:mynotes/views/notes/notes_list_view.dart';
-
 import '../../enums/menu_action.dart';
 import '../../utilities/dialogs/logout_dialog.dart';
 
@@ -34,7 +32,7 @@ class _NoteViewState extends State<NoteView> {
           actions: [
             IconButton(
               onPressed: () {
-                Navigator.of(context).pushNamed(newNotesRoute);
+                Navigator.of(context).pushNamed(createOrUpdateNoteRoute);
               },
               icon: const Icon(Icons.add),
             ),
@@ -79,6 +77,12 @@ class _NoteViewState extends State<NoteView> {
                                 notes: allNotes,
                                 onDeleteNote: (note) async {
                                   await _notesService.deleteNote(id: note.id);
+                                },
+                                onTap: (DatabaseNote note) {
+                                  Navigator.of(context).pushNamed(
+                                    createOrUpdateNoteRoute,
+                                    arguments: note,
+                                  );
                                 },
                               );
                             } else {
