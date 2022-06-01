@@ -102,6 +102,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
                 await showCannotShareEmptyNoteDialog(context);
               } else {
                 Share.share(text);
+                
               }
             },
             icon: const Icon(Icons.share),
